@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingWallpaper.Android", "BingWallpaper\BingWallpaper.Android\BingWallpaper.Android.csproj", "{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingWallpaper", "BingWallpaper\BingWallpaper\BingWallpaper.csproj", "{92349651-2C41-4295-BE27-FA76D3B87D0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49F5A60-EA47-448E-BEFF-AF1EA307C23F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92349651-2C41-4295-BE27-FA76D3B87D0D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5F4BA9B7-0ECF-4703-92CA-A7C672E01AEE}
+	EndGlobalSection
+EndGlobal
