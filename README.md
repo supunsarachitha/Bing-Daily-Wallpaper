@@ -9,8 +9,9 @@ mobile technology - xamarin forms
 image archive - bing wallpaper
 
 ## code sample
- > WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
- > wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
-
+```
+WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
+wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
+```
 
 
