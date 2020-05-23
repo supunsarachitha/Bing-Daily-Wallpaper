@@ -1,7 +1,7 @@
 # Bing-Daily-Wallpaper
 
 This mobile app use bing wallpaper and set as mobile wallpaper automatically.
-This is an open source project you can find source code from here.
+This is an open source project.
 
 ## Built With
 mobile technology - xamarin forms
