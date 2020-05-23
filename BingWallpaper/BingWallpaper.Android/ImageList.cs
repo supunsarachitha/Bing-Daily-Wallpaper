@@ -20,13 +20,27 @@ namespace BingWallpaper.Droid
 {
     public class ImageList : imagelist
     {
-        public bool ChangeWallPaperRes(string fileLocation)
+        public bool ChangeWallPaperRes(string fileLocation, int screen)
         {
             int id = (int)typeof(Resource.Drawable).GetField(fileLocation).GetValue(null);
 
             WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
 
             wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id));
+
+            if (screen == 1)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
+            }
+            else if (screen == 2)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
+            }
+            else if (screen == 3)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
+            }
 
             return true;
         }
@@ -35,7 +49,7 @@ namespace BingWallpaper.Droid
         {
             List<string> imagesList = new List<string>();
 
-                var files = Directory.EnumerateFiles("/storage/emulated/0/Android/data/com.companyname.bingwallpaper/files/");
+                var files = Directory.EnumerateFiles("/storage/emulated/0/Android/data/lk.stechbuzz.bingwallpaper/files/");
                 foreach (var item in files)
                 {
                     imagesList.Add(item);
@@ -47,20 +61,26 @@ namespace BingWallpaper.Droid
 
 
 
-        bool imagelist.ChangeWallPaper(string filelocation)
+        bool imagelist.ChangeWallPaper(string filelocation, int screen)
         {
 
-            //Thread thread = new Thread(async() =>
-            //{
-                WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
+            WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
+            if (screen == 1)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.System);
+            }
+            else if (screen == 2)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.Lock);
+            }
+            else if (screen == 3)
+            {
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.Lock);
+                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.System);
+            }
 
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)));
-            //});
-            
-           // thread.Start();
 
 
-            
             return true;
         }
 

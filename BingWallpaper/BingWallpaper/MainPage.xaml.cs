@@ -80,12 +80,33 @@ namespace BingWallpaper
 
             //await SelectPicture(item.fileLocation);
 
-            bool res = await DisplayAlert("", "Set as wallpaper?", "Yes", "Cancel");
+            
 
-            if (res)
+            string action  =await DisplayActionSheet("Set as wallpaper?", "Cancel", null, "Home screen", "Lock screen", "Both");
+
+            int location = 0;
+            if (action == "Home screen")
+            {
+                location = 1;
+            }
+            if (action == "Lock screen")
+            {
+                location =  2;
+            }
+            else if (action == "Both")
+            {
+                location = 3;
+            }
+            else if (action == "Cancel")
+            {
+                return;
+            }
+
+
+            if (action!=null)
             {
                 busyIndi.IsVisible = true;
-                await Task.Delay(10);
+                
                 ImageItems item = (ImageItems)e.CurrentSelection.FirstOrDefault();
 
                 
@@ -97,7 +118,7 @@ namespace BingWallpaper
                     {
                         if (string.IsNullOrEmpty(item.fileLocation))
                         {
-                            bool rest = DependencyService.Get<imagelist>().ChangeWallPaperRes(item.imgSrc.ToString());
+                            bool rest = DependencyService.Get<imagelist>().ChangeWallPaperRes(item.imgSrc.ToString(), location);
                             await Task.Delay(3000);
                             if (rest)
                             {
@@ -107,7 +128,7 @@ namespace BingWallpaper
                         }
                         else
                         {
-                            bool result = DependencyService.Get<imagelist>().ChangeWallPaper(item.fileLocation);
+                            bool result = DependencyService.Get<imagelist>().ChangeWallPaper(item.fileLocation, location);
                             await Task.Delay(3000);
                             if (result)
                             {

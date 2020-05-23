@@ -36,7 +36,7 @@ namespace BingWallpaper.Droid
             constraints.RequiredNetworkType = NetworkType.Connected;
 
             PeriodicWorkRequest taxWorkRequest = PeriodicWorkRequest
-                .Builder.From<DownloadBrain>(TimeSpan.FromHours(6))
+                .Builder.From<DownloadBrain>(TimeSpan.FromHours(1))
                 .SetConstraints(constraints).Build();
             
             WorkManager.GetInstance(Application.Context).EnqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.Keep ,taxWorkRequest);
