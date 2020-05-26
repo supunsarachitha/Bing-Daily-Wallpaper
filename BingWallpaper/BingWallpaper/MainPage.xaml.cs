@@ -14,6 +14,9 @@ using Android.Graphics;
 using Android;
 using Android.Content;
 using Android.Util;
+using Xamarin.Essentials;
+using Android.OS;
+using Android.Graphics.Drawables;
 
 namespace BingWallpaper
 {
@@ -32,128 +35,134 @@ namespace BingWallpaper
             InitializeComponent();
 
 
-            var list = DependencyService.Get<imagelist>().getListOfImages();
-
-            List<ImageItems> imagelist = new List<ImageItems>();
-            foreach (var item in list)
+            if (!Preferences.ContainsKey("EnableAutoWallpaper"))
             {
-                ImageItems itm = new ImageItems();
-
-                itm.imgSrc = ImageSource.FromFile(item);
-                itm.fileLocation = item;
-                imagelist.Add(itm);
-
+                Preferences.Set("EnableAutoWallpaper", true);
+                wallpaperEnableswitch.IsToggled= Preferences.Get("EnableAutoWallpaper", false);
             }
-
-            List<string> reImage = new List<string>();
-            reImage.Add("LavenderBee");
-            reImage.Add("ArmedForces");
-            reImage.Add("CastleDay");
-            reImage.Add("FalklandRockhoppers");
-            reImage.Add("KubotaGarden");
-            reImage.Add("LofotenIslands");
-            reImage.Add("MegellanicCloud");
-            reImage.Add("NorthRimOpens");
-            reImage.Add("OldPatriarchTree");
-            reImage.Add("QatarMuseum");
-            reImage.Add("RoaringFork");
-            reImage.Add("WildflowerWeek");
-
-            foreach (var item in reImage)
+            else
             {
-                ImageItems itm2 = new ImageItems();
-                itm2.imgSrc = item;
-                imagelist.Add(itm2);
-
+                wallpaperEnableswitch.IsToggled = Preferences.Get("EnableAutoWallpaper", false);
             }
-
-
-            lst.ItemsSource = imagelist;
 
         }
 
 
 
-        private async void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void Refresh()
         {
-            //ImageItems item = (ImageItems)e.CurrentSelection.FirstOrDefault();
 
-            //await SelectPicture(item.fileLocation);
+            wallpaperEnableswitch.IsToggled = Preferences.Get("EnableAutoWallpaper", false);
 
-            
-
-            string action  =await DisplayActionSheet("Set as wallpaper?", "Cancel", null, "Home screen", "Lock screen", "Both");
-
-            int location = 0;
-            if (action == "Home screen")
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                location = 1;
-            }
-            if (action == "Lock screen")
-            {
-                location =  2;
-            }
-            else if (action == "Both")
-            {
-                location = 3;
-            }
-            else if (action == "Cancel")
-            {
-                return;
-            }
+                await Task.Delay(2000);
+                busyIndi.IsVisible = false;
+            });
 
 
-            if (action!=null)
-            {
-                busyIndi.IsVisible = true;
-                
-                ImageItems item = (ImageItems)e.CurrentSelection.FirstOrDefault();
+            //try
+            //{
+            //    if (App.CroppedImage != null)
+            //    {
+            //        //Stream stream = new MemoryStream(App.CroppedImage);
 
-                
+            //        //image.Source = ImageSource.FromStream(() => stream);
 
-                Dispatcher.BeginInvokeOnMainThread(async () =>
-                {
+            //        //Content = image;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                    try
-                    {
-                        if (string.IsNullOrEmpty(item.fileLocation))
-                        {
-                            bool rest = DependencyService.Get<imagelist>().ChangeWallPaperRes(item.imgSrc.ToString(), location);
-                            await Task.Delay(3000);
-                            if (rest)
-                            {
-                                busyIndi.IsVisible = false;
-                                await DisplayAlert("", "Wallpaper changed", "Ok");
-                            }
-                        }
-                        else
-                        {
-                            bool result = DependencyService.Get<imagelist>().ChangeWallPaper(item.fileLocation, location);
-                            await Task.Delay(3000);
-                            if (result)
-                            {
-                                busyIndi.IsVisible = false;
-                                await DisplayAlert("", "Wallpaper changed", "Ok");
-                            }
-                        }
+            //}
+        }
 
-                        
-
-                    }
-                    catch (Exception ex)
-                    {
-                        busyIndi.IsVisible = false;
-                        return;
-                    }
-                });
-            }
+        private async void wallpaperEnableswitch_Toggled(object sender, ToggledEventArgs e)
+        {
+            Preferences.Set("EnableAutoWallpaper", e.Value);
 
 
+            //string action = await DisplayActionSheet("Set as wallpaper?", "Cancel", null, "Home screen", "Lock screen", "Both");
 
+            //if (action == "Home screen")
+            //{
+            //    Preferences.Set("Screen", 1);
+            //}
+            //if (action == "Lock screen")
+            //{
+            //    Preferences.Set("Screen", 1);
+            //}
+            //else if (action == "Both")
+            //{
+            //    Preferences.Set("Screen", 1);
+            //}
+            //else if (action == "Cancel")
+            //{
+            //    return;
+            //}
         }
 
 
+        private async void btnOndevice_Clicked(object sender, EventArgs e)
+        {
+            await SelectPicture();
+        }
 
+        private async Task SelectPicture()
+        {
+            Setup();
+
+            _imageSource = null;
+
+            try
+            {
+
+                //========================================pick image from library 
+                var mediaFile = await this._mediaPicker.PickPhotoAsync();
+
+                _imageSource = ImageSource.FromStream(mediaFile.GetStream);
+
+                var memoryStream = new MemoryStream();
+                await mediaFile.GetStream().CopyToAsync(memoryStream);
+                byte[] imageAsByte = memoryStream.ToArray();
+                //================================================================
+
+
+
+                string action = await DisplayActionSheet("Set as wallpaper?", "Cancel", null, "Home screen", "Lock screen", "Both");
+
+                int location = 0;
+                if (action == "Home screen")
+                {
+                    Preferences.Set("Screen", 1);
+                    busyIndi.IsVisible = true;
+                    await Navigation.PushModalAsync(new CropView(imageAsByte, Refresh));
+                }
+                if (action == "Lock screen")
+                {
+                    Preferences.Set("Screen", 2);
+                    busyIndi.IsVisible = true;
+                    await Navigation.PushModalAsync(new CropView(imageAsByte, Refresh));
+                }
+                else if (action == "Both")
+                {
+                    Preferences.Set("Screen", 3);
+                    busyIndi.IsVisible = true;
+                    await Navigation.PushModalAsync(new CropView(imageAsByte, Refresh));
+                }
+                else if (action == "Cancel")
+                {
+                    return;
+                }
+
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+        }
 
         private async void Setup()
         {
@@ -167,54 +176,11 @@ namespace BingWallpaper
             _mediaPicker = CrossMedia.Current;
         }
 
-        private async Task SelectPicture( string location)
+        private async void btnImgBingWallpaper_Tapped(object sender, EventArgs e)
         {
-            Setup();
 
-            _imageSource = null;
+            await Navigation.PushAsync(new ImageScrollView());
 
-            try
-            {
-                byte[] imageAsByte = DependencyService.Get<imagelist>().GetFileBytes(location);
-
-
-                //========================================pick image from library 
-                //var mediaFile = await this._mediaPicker.PickPhotoAsync();
-
-                //_imageSource = ImageSource.FromStream(mediaFile.GetStream);
-
-                //var memoryStream = new MemoryStream();
-                //await mediaFile.GetStream().CopyToAsync(memoryStream);
-                //byte[] imageAsByte = memoryStream.ToArray();
-                //================================================================
-
-                await Navigation.PushModalAsync(new CropView(imageAsByte, Refresh));
-
-            }
-            catch (System.Exception ex)
-            {
-                
-            }
         }
-
-        private void Refresh()
-        {
-            try
-            {
-                if (App.CroppedImage != null)
-                {
-                    Stream stream = new MemoryStream(App.CroppedImage);
-
-                    image.Source = ImageSource.FromStream(() => stream);
-
-                    Content = image;
-                }
-            }
-            catch (Exception ex)
-            {
-               
-            }
-        }
-
     }
 }

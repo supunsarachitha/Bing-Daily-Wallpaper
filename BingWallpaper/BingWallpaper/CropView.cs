@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BingWallpaper
@@ -27,7 +28,14 @@ namespace BingWallpaper
             base.OnDisappearing();
 
             if (DidCrop)
+            {
+                Preferences.Set("EnableAutoWallpaper", false);
                 RefreshAction.Invoke();
+            }
+
+           
+
+
         }
     }
 }

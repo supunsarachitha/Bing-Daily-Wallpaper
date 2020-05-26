@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="BingWallpaper.ImageScrollView" NavigationPage.HasNavigationBar="True" Title="Bing wallpapers">
+    <ContentPage.Content>
+        <Frame  Margin="2,0,2,2" Padding="5,5,5,5">
+            <Grid>
+                <CollectionView   x:Name="lst" SelectionMode="Single" SelectionChanged="lst_SelectionChanged" BackgroundColor="WhiteSmoke" VerticalScrollBarVisibility="Default">
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate >
+                            <Grid Padding="2,2,2,2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ffimageloading:CachedImage Grid.Row="0"
+                        HeightRequest="250" 
+                        Aspect="AspectFill" 
+                        DownsampleHeight="250" 
+                        CacheDuration = "1"
+                        DownsampleUseDipUnits="True" 
+                        LoadingPlaceholder="loading.png"
+                        RetryCount = "0"
+                        RetryDelay = "250"
+                        Source="{Binding imgSrc}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                                </ffimageloading:CachedImage>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout IsVisible="False" x:Name="busyIndi"  BackgroundColor="White" Opacity="1" Orientation="Vertical">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                        <ActivityIndicator Color="#41bfed"  IsRunning="true" />
+                        <Label x:Name="progressname" Text="Loading..." TextColor="#41bfed" VerticalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+
+            </Grid>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

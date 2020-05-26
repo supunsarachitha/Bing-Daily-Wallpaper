@@ -61,7 +61,7 @@ namespace BingWallpaper.Droid
 
                 if (File.Exists(curImagePath))
                 {
-                   
+
                 }
                 else
                 {
@@ -71,6 +71,51 @@ namespace BingWallpaper.Droid
                     try
                     {
                         webClient.DownloadFile(downloadUrl, @curImagePath);
+
+                        WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
+                        if (Xamarin.Essentials.Preferences.Get("EnableAutoWallpaper", false))
+                        {
+                            
+
+                            Android.Graphics.Bitmap rowBitmap = BitmapFactory.DecodeFile(curImagePath);
+
+                            Android.Graphics.Bitmap CroppedBitmap = Android.Graphics.Bitmap.CreateScaledBitmap(rowBitmap, wallpaperManager.DesiredMinimumWidth, wallpaperManager.DesiredMinimumWidth, true);
+
+
+                            Android.Graphics.Bitmap decoded = null;
+                            using (MemoryStream memory = new MemoryStream())
+                            {
+
+                                CroppedBitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Png, 100, memory);
+                                memory.Position = 0;
+                                decoded = Android.Graphics.BitmapFactory.DecodeStream(memory);
+                                memory.Flush();
+                            }
+
+
+
+                            if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 1)
+                            {
+                                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
+                            }
+                            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 2)
+                            {
+                                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
+                            }
+                            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 3)
+                            {
+                                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
+                                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
+                            }
+                            else
+                            {
+                                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
+                            }
+
+                        }
+
+
+
                     }
                     catch (Exception e)
                     {
@@ -78,28 +123,17 @@ namespace BingWallpaper.Droid
                     }
                 }
 
-
-                WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
-                
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile(curImagePath));
-
-                
-
             }
             catch (Exception)
             {
 
                 return;
             }
-           
+
 
 
         }
 
-        
 
-        
-
-        
     }
 }

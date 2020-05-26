@@ -20,23 +20,23 @@ namespace BingWallpaper.Droid
 {
     public class ImageList : imagelist
     {
+
+       //select online images
         public bool ChangeWallPaperRes(string fileLocation, int screen)
         {
             int id = (int)typeof(Resource.Drawable).GetField(fileLocation).GetValue(null);
 
             WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
 
-            wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id));
-
-            if (screen == 1)
+            if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 1)
             {
                 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
             }
-            else if (screen == 2)
+            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 2)
             {
                 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
             }
-            else if (screen == 3)
+            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 3)
             {
                 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
                 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
@@ -60,23 +60,35 @@ namespace BingWallpaper.Droid
 
 
 
-
+        //select resource images
         bool imagelist.ChangeWallPaper(string filelocation, int screen)
         {
 
             WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
-            if (screen == 1)
+            Bitmap decoded = null;
+            Bitmap rowImage = BitmapFactory.DecodeFile((filelocation));
+            using (MemoryStream memory = new MemoryStream())
             {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.System);
+
+                rowImage.Compress(Bitmap.CompressFormat.Png, 100, memory);
+                memory.Position = 0;
+                decoded = BitmapFactory.DecodeStream(memory);
+                memory.Flush();
             }
-            else if (screen == 2)
+
+
+            if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 1)
             {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.Lock);
+                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
             }
-            else if (screen == 3)
+            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 2)
             {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.Lock);
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeFile((filelocation)), null, true, WallpaperManagerFlags.System);
+                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
+            }
+            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 3)
+            {
+                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
+                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
             }
 
 

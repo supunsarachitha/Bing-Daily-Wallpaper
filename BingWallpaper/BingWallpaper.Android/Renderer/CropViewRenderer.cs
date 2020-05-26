@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using BingWallpaper;
 using BingWallpaper.Droid.Renderer;
 using Com.Theartofdev.Edmodo.Cropper;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -46,16 +49,34 @@ namespace BingWallpaper.Droid.Renderer
                 var finishButton = new Button { Text = "Finished" };
                 finishButton.CornerRadius = 50;
 
+                Bitmap decoded = null;
                 finishButton.Clicked += (sender, ex) =>
                 {
+
                     Bitmap cropped = cropImageView.CroppedImage;
+
                     using (MemoryStream memory = new MemoryStream())
                     {
+
                         cropped.Compress(Bitmap.CompressFormat.Png, 100, memory);
-                        App.CroppedImage = memory.ToArray();
+                        memory.Position = 0;
+                        decoded = BitmapFactory.DecodeStream(memory);
+                        memory.Flush();
                     }
+
+                    
+
+
+                    WallpaperSet wallpaperSet = new WallpaperSet();
+                    bool val = wallpaperSet.GetWallpaperBysystem(decoded);
+
+
+
                     page.DidCrop = true;
                     page.Navigation.PopModalAsync();
+
+
+
                 };
 
                 stackLayout.Children.Add(finishButton);
