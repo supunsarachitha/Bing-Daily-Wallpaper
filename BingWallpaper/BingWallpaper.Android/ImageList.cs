@@ -20,30 +20,24 @@ namespace BingWallpaper.Droid
 {
     public class ImageList : imagelist
     {
-
-       //select online images
+        WallpaperSet wallpaperSet = new WallpaperSet();
+        //select online images
         public bool ChangeWallPaperRes(string fileLocation, int screen)
         {
             int id = (int)typeof(Resource.Drawable).GetField(fileLocation).GetValue(null);
 
-            WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
+            Bitmap final = BitmapFactory.DecodeResource(Application.Context.Resources, id);
 
-            if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 1)
-            {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
-            }
-            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 2)
-            {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
-            }
-            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 3)
-            {
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.Lock);
-                wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
-            }
+            
+            bool val = wallpaperSet.GetWallpaperBysystem(final);
+
+            
 
             return true;
         }
+
+
+        //get saved location
 
         public List<string> getListOfImages()
         {
@@ -76,22 +70,7 @@ namespace BingWallpaper.Droid
                 memory.Flush();
             }
 
-
-            if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 1)
-            {
-                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
-            }
-            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 2)
-            {
-                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
-            }
-            else if (Xamarin.Essentials.Preferences.Get("Screen", 1) == 3)
-            {
-                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.Lock);
-                wallpaperManager.SetBitmap(decoded, null, true, WallpaperManagerFlags.System);
-            }
-
-
+            bool val = wallpaperSet.GetWallpaperBysystem(decoded);
 
             return true;
         }

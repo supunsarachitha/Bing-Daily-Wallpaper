@@ -53,12 +53,15 @@ namespace BingWallpaper
         private void Refresh()
         {
 
-            wallpaperEnableswitch.IsToggled = Preferences.Get("EnableAutoWallpaper", false);
-
+           
+            wallpaperEnableswitch.IsToggled = false;
             Device.BeginInvokeOnMainThread(async () =>
             {
+                
                 await Task.Delay(2000);
+                await DisplayAlert("", "Wallpaper changed", "Ok");
                 busyIndi.IsVisible = false;
+
             });
 
 
@@ -112,6 +115,8 @@ namespace BingWallpaper
 
         private async Task SelectPicture()
         {
+
+            busyIndi.IsVisible = true;
             Setup();
 
             _imageSource = null;
@@ -154,13 +159,17 @@ namespace BingWallpaper
                 }
                 else if (action == "Cancel")
                 {
+                    busyIndi.IsVisible = false;
                     return;
+
                 }
+
+                busyIndi.IsVisible = false;
 
             }
             catch (System.Exception ex)
             {
-
+                busyIndi.IsVisible = false;
             }
         }
 
@@ -181,6 +190,12 @@ namespace BingWallpaper
 
             await Navigation.PushAsync(new ImageScrollView());
 
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            busyIndi.IsVisible = false;
+            return base.OnBackButtonPressed();
         }
     }
 }

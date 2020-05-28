@@ -14,6 +14,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Work;
+using Xamarin.Essentials;
 
 namespace BingWallpaper.Droid
 {
@@ -45,7 +46,7 @@ namespace BingWallpaper.Droid
                 xmldoc.Load(stream);
 
                 string picturePath = Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
-                string wallpaperSavePath = Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
+                string wallpaperSavePath = Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath ;
 
 
                 //check folder
@@ -53,10 +54,37 @@ namespace BingWallpaper.Droid
                 {
                     Directory.CreateDirectory(wallpaperSavePath);
                 }
+                else
+                {
+                    //delete older files
+                    try
+                    {
+                        var files = Directory.EnumerateFiles("/storage/emulated/0/Android/data/lk.stechbuzz.bingwallpaper/files/");
+                        if (files.Count() > 60)
+                        {
+                            string[] f = Directory.GetFiles("/storage/emulated/0/Android/data/lk.stechbuzz.bingwallpaper/files/");
+                            foreach (var item in f)
+                            {
+                                File.SetAttributes(item, FileAttributes.Normal);
+                                File.Delete(item);
+                            }
 
-                string fullStartDate = xmldoc["images"]["image"]["fullstartdate"].InnerText;
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    
+
+                }
+
+
+
+                string fullStartDate = (xmldoc["images"]["image"]["fullstartdate"].InnerText);
                 string urlBase = xmldoc["images"]["image"]["urlBase"].InnerText;
 
+                
                 string curImagePath = wallpaperSavePath + fullStartDate + ".jpg";
 
                 if (File.Exists(curImagePath))
@@ -114,6 +142,8 @@ namespace BingWallpaper.Droid
 
                         }
 
+
+                        
 
 
                     }

@@ -8,6 +8,9 @@ using Android.Widget;
 using Android.OS;
 using AndroidX.Work;
 using Android.Content;
+using System.IO;
+using System.Globalization;
+using System.Linq;
 
 namespace BingWallpaper.Droid
 {
@@ -42,6 +45,9 @@ namespace BingWallpaper.Droid
             WorkManager.GetInstance(Application.Context).EnqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.Keep ,taxWorkRequest);
 
             LoadApplication(new App());
+
+
+            
 
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

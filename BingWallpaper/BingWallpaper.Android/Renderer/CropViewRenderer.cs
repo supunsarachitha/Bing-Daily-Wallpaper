@@ -31,8 +31,19 @@ namespace BingWallpaper.Droid.Renderer
             {
                 var cropImageView = new CropImageView(Context);
                 cropImageView.LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
-                Bitmap bitmp = BitmapFactory.DecodeByteArray(page.Image, 0, page.Image.Length);
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.InSampleSize = 2;
+
+
+                Bitmap bitmp= BitmapFactory.DecodeByteArray(page.Image, 0, page.Image.Length, options);
+
+
                 cropImageView.SetImageBitmap(bitmp);
+                cropImageView.SetMaxCropResultSize(Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Width), Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Height));
+                cropImageView.SetMinCropResultSize(Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Width) / 4,Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Height) / 4);
+                cropImageView.SetMinimumHeight(Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Height) / 2);
+                cropImageView.SetMinimumWidth(Convert.ToInt32(DeviceDisplay.MainDisplayInfo.Width)/2);
 
                 var scrollView = new ScrollView { Content = cropImageView.ToView() };
                 var stackLayout = new StackLayout { Children = { scrollView } };
@@ -52,7 +63,9 @@ namespace BingWallpaper.Droid.Renderer
                 Bitmap decoded = null;
                 finishButton.Clicked += (sender, ex) =>
                 {
-
+                    finishButton.IsEnabled = false;
+                    rotateButton.IsVisible = false;
+                    finishButton.Text = "Please Wait...";
                     Bitmap cropped = cropImageView.CroppedImage;
 
                     using (MemoryStream memory = new MemoryStream())

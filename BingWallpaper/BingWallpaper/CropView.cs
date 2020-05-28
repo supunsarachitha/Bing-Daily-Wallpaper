@@ -30,10 +30,10 @@ namespace BingWallpaper
             if (DidCrop)
             {
                 Preferences.Set("EnableAutoWallpaper", false);
-                RefreshAction.Invoke();
+                
             }
+            RefreshAction.Invoke();
 
-           
 
 
         }

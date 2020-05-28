@@ -82,6 +82,7 @@ namespace BingWallpaper
             }
             else if (action == "Cancel")
             {
+                busyIndi.IsVisible = false;
                 return;
             }
 
