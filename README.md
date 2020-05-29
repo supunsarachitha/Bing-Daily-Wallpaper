@@ -3,7 +3,6 @@
 # Bing-Daily-Wallpaper
 
 This mobile app use bing wallpaper and set as mobile wallpaper automatically.
-This is an open source project.
 
 [![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
 
