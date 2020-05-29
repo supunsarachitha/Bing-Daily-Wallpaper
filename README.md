@@ -7,6 +7,8 @@ This is an open source project.
 
 [![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
 
+[![Download Bing Daily Wallpaper](https://img.shields.io/sourceforge/dm/bing-daily-wallpaper.svg)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
+
 ## Built With
 mobile technology - xamarin forms
 
