@@ -9,7 +9,8 @@
 <img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a>  
 
 
-Android mobile app change home page wallpaper automatically. Wallpaper source is bing daily images. And user can set on device wallpaers too. 
+Android mobile app change home page wallpaper automatically. Wallpaper source is bing daily images. 
+And user also can set on device wallpaers.
 
 ## Built With
 mobile technology - xamarin forms
