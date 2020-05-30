@@ -25,7 +25,7 @@ WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Con
 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
 ```
 
-- schedule workmanager
+#### schedule workmanager
 
 ```
 String TAG = "WallpaperWork";
@@ -42,10 +42,11 @@ WorkManager.GetInstance(Application.Context)
 .EnqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.Keep ,taxWorkRequest);
 ```
 
-- Image compression
+#### Image compression
 
- Bitmap decoded = null;
+
 ```
+ Bitmap decoded = null;
 Bitmap rowImage = BitmapFactory.DecodeFile((filelocation));
 using (MemoryStream memory = new MemoryStream())
 {
