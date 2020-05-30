@@ -2,14 +2,14 @@
 
 # Bing-Daily-Wallpaper
 
-This mobile app use bing wallpaper and set as mobile wallpaper automatically.
-
 [![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
 </br>
 
 <a href="https://play.google.com/store/apps/details?id=lk.stechbuzz.bingwallpaper">
 <img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a>  
 
+
+Android mobile app change home page wallpaper automatically. Wallpaper source is bing daily images. And user can set on device wallpaers too. 
 
 ## Built With
 mobile technology - xamarin forms
