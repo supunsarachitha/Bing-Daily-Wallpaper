@@ -5,7 +5,9 @@
 This mobile app use bing wallpaper and set as mobile wallpaper automatically.
 
 <a href="https://play.google.com/store/apps/details?id=lk.stechbuzz.bingwallpaper">
-<img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a> [![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
+<img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a> ]
+
+[![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
 
 
 
