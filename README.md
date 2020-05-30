@@ -19,7 +19,7 @@ image archive - bing wallpaper
 
 ## code sample
 
-### wallpaper changer
+#### wallpaper changer
 ```
 WallpaperManager wallpaperManager = WallpaperManager.GetInstance(Application.Context);
 wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Resources, id), null, true, WallpaperManagerFlags.System);
