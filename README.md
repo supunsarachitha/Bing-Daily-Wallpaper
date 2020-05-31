@@ -16,8 +16,7 @@ Wallpaper source is bing daily images.
 User also can set on device wallpaers.
 
 ## Built With
-mobile technology - xamarin forms
-
+mobile technology - xamarin forms </br>
 image archive - bing wallpaper
 
 ## code sample
