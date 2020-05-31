@@ -3,6 +3,7 @@
 # Bing-Daily-Wallpaper
 
 [![Download Bing Daily Wallpaper](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
+[![Download Bing Daily Wallpaper](https://sourceforge.net/sflogo.php?type=13&group_id=3227304)](https://sourceforge.net/p/bing-daily-wallpaper/)
 [![Download Bing Daily Wallpaper](https://img.shields.io/sourceforge/dt/bing-daily-wallpaper.svg)](https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download)
 </br>
 
