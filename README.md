@@ -7,8 +7,6 @@
 <a href="https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download"><img alt="Download Bing Daily Wallpaper" src="https://img.shields.io/sourceforge/dt/bing-daily-wallpaper.svg" ></a> <a href="https://sourceforge.net/p/bing-daily-wallpaper/"><img alt="Download Bing Daily Wallpaper" src="https://sourceforge.net/sflogo.php?type=13&group_id=3227304" ></a> 
 
 </br>
-
-
 <a href="https://play.google.com/store/apps/details?id=lk.stechbuzz.bingwallpaper">
 <img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a>  
 
