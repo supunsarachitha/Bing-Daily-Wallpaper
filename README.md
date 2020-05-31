@@ -4,7 +4,7 @@
 
 <a href="https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download"><img alt="Download Bing Daily Wallpaper" src="https://a.fsdn.com/con/app/sf-download-button" width=276 height=48 srcset="https://a.fsdn.com/con/app/sf-download-button?button_size=2x 2x"></a>
 
-<a href="https://sourceforge.net/p/bing-daily-wallpaper/"><img alt="Download Bing Daily Wallpaper" src="https://sourceforge.net/sflogo.php?type=13&group_id=3227304" ></a>
+<a href="https://sourceforge.net/p/bing-daily-wallpaper/"><img alt="Download Bing Daily Wallpaper" src="https://sourceforge.net/sflogo.php?type=13&group_id=3227304" ></a> <a href="https://sourceforge.net/projects/bing-daily-wallpaper/files/latest/download"><img alt="Download Bing Daily Wallpaper" src="https://img.shields.io/sourceforge/dt/bing-daily-wallpaper.svg" ></a>
 
 </br>
 
