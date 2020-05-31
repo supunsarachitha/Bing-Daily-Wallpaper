@@ -10,7 +10,7 @@
 <a href="https://play.google.com/store/apps/details?id=lk.stechbuzz.bingwallpaper">
 <img border="0" alt="On Google Play" src="http://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" height="45" width="200"> </a>  
 </br>
-
+</br>
 
 Android mobile app change home page wallpaper automatically. Wallpaper source is bing daily images. 
 And user also can set on device wallpaers.
