@@ -11,7 +11,8 @@
  
 
 
-Android mobile app change home page wallpaper automatically. Wallpaper source is bing daily images. 
+Android mobile app Seamlessly update your device wallpaper with Bing photos every day. 
+Wallpaper source is bing daily images. 
 And user also can set on device wallpaers.
 
 ## Built With
