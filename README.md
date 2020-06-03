@@ -46,7 +46,7 @@ WorkManager.GetInstance(Application.Context)
 
 #### Image compression
 
-images compress to png format
+images compress to png format before pass wallpaperManager.
 
 ```
  Bitmap decoded = null;
