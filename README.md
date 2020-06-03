@@ -28,7 +28,7 @@ wallpaperManager.SetBitmap(BitmapFactory.DecodeResource(Application.Context.Reso
 ```
 
 #### schedule workmanager
-
+workmanger is checking whether new image available in archive.
 ```
 String TAG = "WallpaperWork";
 
@@ -46,6 +46,7 @@ WorkManager.GetInstance(Application.Context)
 
 #### Image compression
 
+images compress to png format
 
 ```
  Bitmap decoded = null;
