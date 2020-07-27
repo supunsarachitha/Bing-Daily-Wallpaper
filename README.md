@@ -13,7 +13,7 @@
 
 Android mobile app Seamlessly update your device wallpaper with Bing photos every day.
 Wallpaper source is bing daily images. 
-User also can set on device wallpaers.
+User also can set on device wallpapers.
 
 ## Built With
 mobile technology - xamarin forms </br>
